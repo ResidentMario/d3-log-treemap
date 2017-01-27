@@ -1,0 +1,11 @@
+Type,Subtype
+Indoor Air Quality,
+Smoking,
+Unspecified Air Quality Issue,
+Animal Abuse,
+Animal Facility Issue,
+Air Quality,Indoor Air Quality,
+Air Quality,Smoking,
+Air Quality,Unspecified Air Quality Issue,
+Animal Issues,Animal Abuse,
+Animal Issues,Animal Facility Issue,

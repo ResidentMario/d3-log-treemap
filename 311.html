@@ -1,7 +1,7 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 
 <!-- generated using browserify threshold-tree.js -o ./threshold-tree-bundled --standalone tree -->
-<script src="./threshold-tree-bundled.js"></script>
+<script src="threshold-tree-bundled.js"></script>
 
 <svg></svg>
 
@@ -11,18 +11,44 @@
 
     let svg = d3.select("svg").attr("width", width).attr("height", height);
 
-    d3.csv("data/complaints.csv", function(error, d) {
+    d3.csv("data/complaints_debug.csv", function(error, d) {
         if (error) throw error;
 
         let data = new tree.ThresholdTree(d, 0.1);
+        let repr = data.as_hierarchy();
 
-        console.log(d);
+        console.log(repr);
 
         let root = d3.stratify()
-            .id(function(d) { return d.subtype; })
-            .parentId(function(d) { return d.type; })
-            (d);
-        console.log(root);
+            .id(function(d) { return d.name; })
+            .parentId(function(d) { return d.parent; })
+            (repr);
+
+//        console.log(d);
+
+//        let example = [
+//            {"name": "Eve",   "parent": ""},
+//            {"name": "Cain",  "parent": "Eve"},
+//            {"name": "Seth",  "parent": "Eve"},
+//            {"name": "Enos",  "parent": "Seth"},
+//            {"name": "Noam",  "parent": "Seth"},
+//            {"name": "Abel",  "parent": "Eve"},
+//            {"name": "Awan",  "parent": "Eve"},
+//            {"name": "Enoch", "parent": "Awan"},
+//            {"name": "Azura", "parent": "Eve"}
+//        ];
+//
+//        let root = d3.stratify()
+//            .id(function(d) { return d.name; })
+//            .parentId(function(d) { return d.parent; })
+//            (example);
+//
+//        console.log(root);
+
+//        let root = d3.stratify()
+//            .id(function(d) { return d['Type']; })
+//            .parentId(function(d) { return d['Subtype']; })
+//            (d);
 
 //        let treemap = d3.treemap()
 //            .tile(d3.treemapResquarify)
